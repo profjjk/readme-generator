@@ -69,7 +69,19 @@ function addTitle() {
     })
 }
 
-
+// Add a project description.
+function addDescription() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "description",
+            message: "Add a project description: "
+        }
+    ]).then(function(userInput) {
+        descriptionObj = {section: "description", content: `"${userInput.description}"`}
+        mainMenu();
+    })
+}
 
 
 
