@@ -2,66 +2,52 @@
 const fs = require('fs');
 const util = require('util');
 const inquirer = require('inquirer');
-const generateMarkdown = require('generateMarkdown.js');
-
-// const writeToFile = util.promisify(fs.writeFile)
+const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
-const questions = () =>
+const readmeData = [];
+
+start()
+function start() {
+    console.log("Create a README.md file:\n");
+    mainMenu();
+}
+
+function mainMenu() {
     inquirer.prompt([
         {
-            type: 'input',
-            name: 'title',
-            message: 'What is your application title?',
-        },
-        {
-            type: 'input',
-            name: 'description',
-            message: 'Describe your application:',
-        },
-        {
-            type: 'checkbox',
-            name: 'contents',
-            message: 'What do you want to include in your table of content?',
-            choices: ["How to Access", "How to Install", "How to Use", "Screenshot", "Code Snippets", "Technologies Used", "How to Contribute", "How to Report Issues", "About Me", "References"],
-        },
-        {
-            type: 'input',
-            name: 'access',
-            message: 'How does the user access your application?',
-        },
-        {
-            type: 'input',
-            name: 'install',
-            message: 'How does the user install your application?',
-        },
-        {
-            type: 'input',
-            name: 'use',
-            message: 'How to use your application?',
-        },
-        {
-            type: 'input',
-            name: 'screenshot',
-            message: 'Enter the file pathway for a screenshot of your application:',
-        },
-        {
-            type: 'checkbox',
-            name: 'technologies',
-            message: 'Which technologies were used in the creation of your application?',
-            choices: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Node.js'],
-        },
-        {
-            type: 'input',
-            name: 'contribute',
-            message: 'Does does one contribute to your application?',
-        },
-        {
-            type: 'input',
-            name: 'report',
-            message: 'How does one report issues about your application?',
-        },
-    ])
+            type: "list",
+            name: "menuChoice",
+            message: "Where would you like to start?",
+            choices: ["Add a title", "Add a description", "Add installation instructions", "Add usage information", "Add contribution guidelines", "Add test instructions", "Add contact info for questions", "Select a license", "Exit"]
+        }
+    ]).then(function(userChoice) {
+        switch (userChoice.menuChoice) {
+            case "Add a title": addTitle();
+                break;
+            case "Add a description": addDescription();
+                break;
+            case "Add installation instructions": installInst();
+                break;
+            case "Add usage information": usageInfo();
+                break;
+            case "Add contribution guidelines": contributionGuide();
+                break;
+            case "Add test instructions": testInst();
+                break;
+            case "Add contact info for questions": contactInfo();
+                break;
+            case "Select a license": selectLicense();
+                break;
+            case "Exit":
+                console.log("Your README.md file has been created!");
+                createReadme();
+        }
+    })
+}
+
+
+
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
@@ -71,6 +57,3 @@ function init() {}
 
 // Function call to initialize app
 init();
-
-
-// 1. 

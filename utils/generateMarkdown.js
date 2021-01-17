@@ -34,8 +34,31 @@ SOFTWARE.
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.title}
+  return `
+    # ${data.title}
 
+    ## ${data.description}
+
+    ## Table of Contents
+    [${data.contents[0]}](##${data.contents[0]})
+    [${data.contents[0]}](##${data.contents[0]})
+    [${data.contents[0]}](##${data.contents[0]})
+    [${data.contents[0]}](##${data.contents[0]})
+    [${data.contents[0]}](##${data.contents[0]})
+
+    ## ${data.technologies}
+
+    ## ${access}
+    [Portfolio Webpage](https://profjjk.github.io/portfolio/)
+
+    ## About Me
+    * [LinkedIn](www.linkedin.com/in/the-real-jordan-kelly)
+    * [GitHub](https://github.com/profjjk)
+
+    ## Screenshots
+    ![Hero](assets/img/hero.png)
+    ![Profile](assets/img/profile.png)
+    ![Portfolio](assets/img/portfolio.png)
 `;
 }
 
