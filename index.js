@@ -6,7 +6,11 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
 const readmeData = [];
+let titleObj; let descriptionObj; let installObj; let usageObj; let contributionObj; let testObj; let contactObj; let licenseObj;
 
+////////////////////////////////
+///// INITIALIZE MAIN MENU /////
+////////////////////////////////
 start()
 function start() {
     console.log("Create a README.md file:\n");
@@ -18,7 +22,7 @@ function mainMenu() {
         {
             type: "list",
             name: "menuChoice",
-            message: "Where would you like to start?",
+            message: "Select a section to add/edit:",
             choices: ["Add a title", "Add a description", "Add installation instructions", "Add usage information", "Add contribution guidelines", "Add test instructions", "Add contact info for questions", "Select a license", "Exit"]
         }
     ]).then(function(userChoice) {
@@ -41,10 +45,31 @@ function mainMenu() {
                 break;
             case "Exit":
                 console.log("Your README.md file has been created!");
-                createReadme();
+                // createReadme();
         }
     })
 }
+
+
+//////////////////////////
+///// DATA FUNCTIONS /////
+//////////////////////////
+
+// Add a project title.
+function addTitle() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "title",
+            message: "What is the title of your project? "
+        }
+    ]).then(function(userInput) {
+        titleObj = {section: "title", content: `"${userInput.title}"`}
+        mainMenu();
+    })
+}
+
+
 
 
 
