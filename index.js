@@ -97,7 +97,7 @@ function installInst() {
     })
 }
 
-// Add a project description.
+// Add usage information.
 function usageInfo() {
     inquirer.prompt([
         {
@@ -107,6 +107,20 @@ function usageInfo() {
         }
     ]).then(function(userInput) {
         usageObj = {section: "usage", content: `"${userInput.usage}"`}
+        mainMenu();
+    })
+}
+
+// Add contribution guidelines.
+function contributionGuide() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "contribution",
+            message: "Add contribution guidelines: "
+        }
+    ]).then(function(userInput) {
+        contributionObj = {section: "contribution", content: `"${userInput.contribution}"`}
         mainMenu();
     })
 }
