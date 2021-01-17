@@ -83,6 +83,20 @@ function addDescription() {
     })
 }
 
+// Add installation instructions.
+function installInst() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "installation",
+            message: "Add installation instructions: "
+        }
+    ]).then(function(userInput) {
+        installObj = {section: "installation", content: `"${userInput.installation}"`}
+        mainMenu();
+    })
+}
+
 
 
 
