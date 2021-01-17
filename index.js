@@ -97,6 +97,19 @@ function installInst() {
     })
 }
 
+// Add a project description.
+function usageInfo() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "usage",
+            message: "Add usage information: "
+        }
+    ]).then(function(userInput) {
+        usageObj = {section: "usage", content: `"${userInput.usage}"`}
+        mainMenu();
+    })
+}
 
 
 
