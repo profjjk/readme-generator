@@ -126,7 +126,7 @@ function contributionGuide() {
     })
 }
 
-// Add contribution guidelines.
+// Add testing instructions.
 function testInst() {
     inquirer.prompt([
         {
@@ -136,6 +136,26 @@ function testInst() {
         }
     ]).then(function(userInput) {
         testObj = {section: "test", content: `"${userInput.test}"`}
+        mainMenu();
+    })
+}
+
+// Add contact info.
+function contactInfo() {
+    console.log("Add contact information:\n")
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "username",
+            message: "GitHub username: "
+        }
+        {
+            type: "input",
+            name: "email",
+            message: "Email: "
+        }
+    ]).then(function(userInput) {
+        contactObj = {section: "contact", content: {username: `"${userInput.username}"`, email: `"${userInput.email}"`}}
         mainMenu();
     })
 }
