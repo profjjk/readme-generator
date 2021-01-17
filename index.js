@@ -8,6 +8,7 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 const readmeData = [];
 let titleObj; let descriptionObj; let installObj; let usageObj; let contributionObj; let testObj; let contactObj; let licenseObj;
 
+
 ////////////////////////////////
 ///// INITIALIZE MAIN MENU /////
 ////////////////////////////////
@@ -125,6 +126,19 @@ function contributionGuide() {
     })
 }
 
+// Add contribution guidelines.
+function testInst() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "test",
+            message: "Add testing instructions: "
+        }
+    ]).then(function(userInput) {
+        testObj = {section: "test", content: `"${userInput.test}"`}
+        mainMenu();
+    })
+}
 
 
 // TODO: Create a function to write README file
