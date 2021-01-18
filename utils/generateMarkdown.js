@@ -113,7 +113,7 @@ ${renderLicenseBadge(data.licenseChoice)}<br>
 * [Usage Information](##usage-information)
 * [Contribution Guidelines](##contribution-guidelines)
 * [Testing Instructions](##testing-instructions)
-* [Contact Info](##contact-info)
+* [Questions](##questions)
 * [License](##license)
 ---
 
@@ -124,9 +124,8 @@ ${data.description}
 ${data.installation}
 
 ## Usage Information
-\`\`\`
 ${data.usage}
-\`\`\`
+
 ## Contribution Guidelines
 ${data.contribution}
 
