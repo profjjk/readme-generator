@@ -24,4 +24,4 @@ This is an application that utilizes node.js to create a professional README fil
 * [GitHub](https://github.com/profjjk)
 
 ## Application Demo
-![Demo](readme-gen.gif)
+![Demo](readme-gen-demo.gif)
