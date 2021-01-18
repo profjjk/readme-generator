@@ -44,9 +44,8 @@ function mainMenu() {
                 break;
             case "Select a license": selectLicense();
                 break;
-            case "Exit":
+            case "Exit": createReadme();
                 console.log("Your README.md file has been created!");
-                // createReadme();
         }
     })
 }
@@ -148,7 +147,7 @@ function contactInfo() {
             type: "input",
             name: "username",
             message: "GitHub username: "
-        }
+        },
         {
             type: "input",
             name: "email",
@@ -156,6 +155,21 @@ function contactInfo() {
         }
     ]).then(function(userInput) {
         contactObj = {section: "contact", content: {username: `"${userInput.username}"`, email: `"${userInput.email}"`}}
+        mainMenu();
+    })
+}
+
+// Add a license.
+function selectLicense() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "licenseChoice",
+            message: "Select a license: ",
+            choices: ["MIT License", "GNU GPLv3", "Apache License 2.0", "The Unlicense"],
+        }
+    ]).then(function(userChoice) {
+        licenseObj = {section: "license", content: `"${userChoice.licenseChoice}"`}
         mainMenu();
     })
 }
