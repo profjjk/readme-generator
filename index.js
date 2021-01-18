@@ -9,7 +9,6 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 // Use inquirer to get user data.
 const promptUser = () =>
-    console.log("Create a README.md file:\n")
     inquirer.prompt([
         {
             type: "input",
