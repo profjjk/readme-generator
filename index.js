@@ -1,11 +1,13 @@
-// TODO: Include packages needed for this application
+// Packages needed for application.
 const fs = require('fs');
 const util = require('util');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
+// Promisify fs.writeFile.
 const writeFileAsync = util.promisify(fs.writeFile);
 
+// Use inquirer to get user data.
 const promptUser = () =>
     inquirer.prompt([
         {
@@ -66,7 +68,9 @@ const promptUser = () =>
         },
     ]);
 
+// Execute application.
 promptUser()
+    .then((license) => renderLicenseSection(license))
     .then((answers) => writeFileAsync("myREADME.md", generateMarkdown(answers)))
     .then(() => console.log("Your file has been created!"))
     .catch((err) => console.error(err))
