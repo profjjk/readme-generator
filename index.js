@@ -177,6 +177,7 @@ function selectLicense() {
         },
     ]).then(function(userChoice) {
         readmeData.push({section: "license", content: `"${userChoice.licenseChoice}"`});
+        combineData();
         mainMenu();
     })
 }
@@ -209,14 +210,20 @@ function combineData() {
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    combineData();
+    
 }
+
+writeFileAsync("myREADME.md", readmeData).then(function() {
+    generateMarkdown();
+}).catch((err) => {
+    console.log("Something went wrong!");
+})
 
 // TODO: Create a function to initialize app
 function init() {
     console.log("Create a README.md file:\n");
     mainMenu()
-        .then(generateMarkdown)
+        .then(writeToFile);
     console.log("Your README.md file has been created!");
 }
 // Function call to initialize app
