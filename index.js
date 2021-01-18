@@ -9,6 +9,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 // Use inquirer to get user data.
 const promptUser = () =>
+    console.log("Create a README.md file:\n")
     inquirer.prompt([
         {
             type: "input",
@@ -43,12 +44,12 @@ const promptUser = () =>
         {
             type: "input",
             name: "username",
-            message: "GitHub username: "
+            message: "Contact Info: What's your GitHub username? "
         },
         {
             type: "input",
             name: "email",
-            message: "Email: "
+            message: "Contact Info: What is your email? "
         },
         {
             type: "list",
@@ -59,12 +60,12 @@ const promptUser = () =>
         {
             type: "input",
             name: "licenseName",
-            message: "Enter your full name for the license",
+            message: "Enter your full name for the license: ",
         },
         {
             type: "input",
             name: "licenseYear",
-            message: "Enter the current year for the license",
+            message: "Enter the current year for the license: ",
         },
     ]);
 

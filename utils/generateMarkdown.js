@@ -25,10 +25,10 @@ const renderLicenseLink = (license) => {
 }
 
 // Render the license text in markdown.
-const renderLicenseSection = (license) => {
-  if (license === "Apache License 2.0") {
+const renderLicenseSection = (licenseChoice, licenseName, licenseYear) => {
+  if (licenseChoice === "Apache License 2.0") {
     return `
-    Copyright ${license.licenseYear} ${license.licenseName}
+    Copyright ${licenseYear} ${licenseName}
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -42,9 +42,9 @@ const renderLicenseSection = (license) => {
     See the License for the specific language governing permissions and
     limitations under the License.
     `;
-  } else if (license === "GNU GPLv3") {
+  } else if (licenseChoice === "GNU GPLv3") {
     return `
-    Copyright (C) ${license.licenseYear}  ${license.licenseName}
+    Copyright (C) ${licenseYear}  ${licenseName}
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,9 +59,9 @@ const renderLicenseSection = (license) => {
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
     `;
-  } else if (license === "MIT License") {
+  } else if (licenseChoice === "MIT License") {
     return `
-    Copyright ${license.licenseYear} ${license.licenseName}
+    Copyright ${licenseYear} ${licenseName}
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -103,6 +103,8 @@ const renderLicenseSection = (license) => {
 // Generate markdown for the README file.
 const generateMarkdown = (data) =>
 `
+${renderLicenseBadge(data.licenseChoice)}<br>
+
 # ${data.title}
 ---
 ## Table of Contents
@@ -135,9 +137,8 @@ ${data.test}
 * Email: ${data.email}
 
 ## License
-${renderLicenseBadge(data.licenseChoice)}<br>
 ${renderLicenseLink(data.licenseChoice)}<br>
-${renderLicenseSection(data.licenseChoice)}
+${renderLicenseSection(data.licenseChoice, data.licenseName, data.licenseYear)}
 `;
 
 // Export modules.
