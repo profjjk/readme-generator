@@ -124,8 +124,9 @@ ${data.description}
 ${data.installation}
 
 ## Usage Information
+\`\`\`
 ${data.usage}
-
+\`\`\`
 ## Contribution Guidelines
 ${data.contribution}
 
