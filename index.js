@@ -4,20 +4,18 @@ const util = require('util');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
+const writeFileAsync = util.promisify(fs.writeFile);
+
 // TODO: Create an array of questions for user input
 const readmeData = [];
+const tableContents = [];
 let titleObj; let descriptionObj; let installObj; let usageObj; let contributionObj; let testObj; let contactObj; let licenseObj;
 
 
 ////////////////////////////////
 ///// INITIALIZE MAIN MENU /////
 ////////////////////////////////
-start()
-function start() {
-    console.log("Create a README.md file:\n");
-    mainMenu();
-}
-
+// A menu from which user can select which section add or edit.
 function mainMenu() {
     inquirer.prompt([
         {
@@ -44,8 +42,7 @@ function mainMenu() {
                 break;
             case "Select a license": selectLicense();
                 break;
-            case "Exit": createReadme();
-                console.log("Your README.md file has been created!");
+            case "Exit": writeToFile();
         }
     })
 }
@@ -64,7 +61,7 @@ function addTitle() {
             message: "What is the title of your project? "
         }
     ]).then(function(userInput) {
-        titleObj = {section: "title", content: `"${userInput.title}"`}
+        titleObj = {section: "title", content: `"${userInput.title}"`};
         mainMenu();
     })
 }
@@ -78,7 +75,7 @@ function addDescription() {
             message: "Add a project description: "
         }
     ]).then(function(userInput) {
-        descriptionObj = {section: "description", content: `"${userInput.description}"`}
+        descriptionObj = {section: "description", content: `"${userInput.description}"`};
         mainMenu();
     })
 }
@@ -92,7 +89,7 @@ function installInst() {
             message: "Add installation instructions: "
         }
     ]).then(function(userInput) {
-        installObj = {section: "installation", content: `"${userInput.installation}"`}
+        installObj = {section: "installation", content: `"${userInput.installation}"`};
         mainMenu();
     })
 }
@@ -106,7 +103,7 @@ function usageInfo() {
             message: "Add usage information: "
         }
     ]).then(function(userInput) {
-        usageObj = {section: "usage", content: `"${userInput.usage}"`}
+        usageObj = {section: "usage", content: `"${userInput.usage}"`};
         mainMenu();
     })
 }
@@ -120,7 +117,7 @@ function contributionGuide() {
             message: "Add contribution guidelines: "
         }
     ]).then(function(userInput) {
-        contributionObj = {section: "contribution", content: `"${userInput.contribution}"`}
+        contributionObj = {section: "contribution", content: `"${userInput.contribution}"`};
         mainMenu();
     })
 }
@@ -134,7 +131,7 @@ function testInst() {
             message: "Add testing instructions: "
         }
     ]).then(function(userInput) {
-        testObj = {section: "test", content: `"${userInput.test}"`}
+        testObj = {section: "test", content: `"${userInput.test}"`};
         mainMenu();
     })
 }
@@ -154,7 +151,7 @@ function contactInfo() {
             message: "Email: "
         }
     ]).then(function(userInput) {
-        contactObj = {section: "contact", content: {username: `"${userInput.username}"`, email: `"${userInput.email}"`}}
+        contactObj = {section: "contact", content: {username: `"${userInput.username}"`, email: `"${userInput.email}"`}};
         mainMenu();
     })
 }
@@ -167,19 +164,60 @@ function selectLicense() {
             name: "licenseChoice",
             message: "Select a license: ",
             choices: ["MIT License", "GNU GPLv3", "Apache License 2.0", "The Unlicense"],
-        }
+        },
+        {
+            type: "input",
+            name: "licenseName",
+            message: "Enter your name for the license: ",
+        },
+        {
+            type: "input",
+            name: "licenseYear",
+            message: "Enter the current year for the license: ",
+        },
     ]).then(function(userChoice) {
-        licenseObj = {section: "license", content: `"${userChoice.licenseChoice}"`}
+        readmeData.push({section: "license", content: `"${userChoice.licenseChoice}"`});
         mainMenu();
     })
 }
 
+// Put all of the gathered README data together.
+function combineData() {
+    if (titleObj) {readmeData.push(titleObj);};
+    if (descriptionObj) {readmeData.push(descriptionObj);
+        tableContents.push("Description");
+    };
+    if (installObj) {readmeData.push(installObj);
+        tableContents.push("Installation Instructions");
+    };
+    if (usageObj) {readmeData.push(usageObj);
+        tableContents.push("Usage Information");
+    };
+    if (contributionObj) {readmeData.push(contributionObj);
+        tableContents.push("Contribution Guidelines");
+    };
+    if (testObj) {readmeData.push(testObj);
+        tableContents.push("Testing Instructions");
+    };
+    if (contactObj) {readmeData.push(contactObj);
+        tableContents.push("Contact Information");
+    };
+    if (licenseObj) {readmeData.push(licenseObj);
+        tableContents.push("License");
+    };
+}
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    combineData();
+}
 
 // TODO: Create a function to initialize app
-function init() {}
-
+function init() {
+    console.log("Create a README.md file:\n");
+    mainMenu()
+        .then(generateMarkdown)
+    console.log("Your README.md file has been created!");
+}
 // Function call to initialize app
 init();
