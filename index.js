@@ -70,7 +70,6 @@ const promptUser = () =>
 
 // Execute application.
 promptUser()
-    .then((license) => renderLicenseSection(license))
     .then((answers) => writeFileAsync("myREADME.md", generateMarkdown(answers)))
     .then(() => console.log("Your file has been created!"))
     .catch((err) => console.error(err))
