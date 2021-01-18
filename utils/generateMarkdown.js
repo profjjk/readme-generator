@@ -1,63 +1,84 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge() {
-  if (licenseObj === "Apache License 2.0") {
-    `[![License Apache 2.0](https://img.shields.io/badge/License-Apache%202.00-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
-  } else if (licenseObj === "GNU GPLv3") {
-    `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`
-  } else if (licensObj === "MIT License") {
-    `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
-  } else if (licenseObj === "The Unlicense") {
-    `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)`
+const renderLicenseBadge = (license) => {
+  if (license === "Apache License 2.0") {
+    return `[![License Apache 2.0](https://img.shields.io/badge/License-Apache%202.00-blue.svg)](https://opensource.org/licenses/Apache-2.0)`;
+  } else if (license === "GNU GPLv3") {
+    return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`;
+  } else if (license === "MIT License") {
+    return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`;
   } else {
-    return;
+    return `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)`;
   }
 }
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {}
+const renderLicenseLink = (license) => {
+  if (license === "Apache License 2.0") {
+    return `[Apache License 2.0](https://opensource.org/licenses/Apache-2.0)`;
+  } else if (license === "GNU GPLv3") {
+    return `[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0)`;
+  } else if (license === "MIT License") {
+    return `[MIT License](https://opensource.org/licenses/MIT)`;
+  } else {
+    return `[The Unlicense](http://unlicense.org/)`;
+  }
+}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+const renderLicenseSection = (license) => {
+  if (license === "Apache License 2.0") {
+    return `[Apache License 2.0](https://opensource.org/licenses/Apache-2.0)`;
+  } else if (license === "GNU GPLv3") {
+    return `[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0)`;
+  } else if (license === "MIT License") {
+    return `[MIT License](https://opensource.org/licenses/MIT)`;
+  } else {
+    return `[The Unlicense](http://unlicense.org/)`;
+  }
+}
 
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(readmeData) {`
-# ${readmeData.title}
+const generateMarkdown = (data) =>
+`
+# ${data.title}
 ---
-## Table of Contents`
-for (let i = 0; i < tableContents.length; i++) {
-  let words = tableContents[i].split(" ");
-  let wordsJoin = words.join("-")
-  let wordsJoinLower = wordsJoin.toLowerCase();
-  console.log(wordsJoinLower);
-}
-`* [${tableContents[i]}](##${wordsJoinLower})
+## Table of Contents
+* [Description](##description)
+* [Installation Instructions](##installation-instructions)
+* [Usage Information](##usage-information)
+* [Contribution Guidelines](##contribution-guidelines)
+* [Testing Instructions](##testing-instructions)
+* [Contact Info](##contact-info)
+* [License](##license)
 ---
-## ${tableContents[0]}
-${readmeData.description}
 
-## ${tableContents[1]}
-${readmeData.installation}
+## Description
+${data.description}
 
-## ${tableContents[2]}
-${readmeData.usage}
+## Installation Instructions
+${data.installation}
 
-## ${tableContents[3]}
-${readmeData.contribution}
+## Usage Information
+${data.usage}
 
-## ${tableContents[4]}
-${readmeData.test}
+## Contribution Guidelines
+${data.contribution}
 
-## ${tableContents[5]}
-GitHub username: ${readmeData.username}
-Email: ${readmeData.email}
+## Testing Instructions
+${data.test}
+
+## Questions
+* GitHub username: ${data.username}
+* Email: ${data.email}
 
 ## License
-`
-renderLicenseBadge();
-}
+${renderLicenseBadge(data.licenseChoice)}
+${renderLicenseLink(data.licenseChoice)}
 
-module.exports = generateMarkdown;
+`;
+
+module.exports = generateMarkdown, renderLicense;
