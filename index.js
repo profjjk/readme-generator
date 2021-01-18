@@ -54,6 +54,16 @@ const promptUser = () =>
             message: "Select a license: ",
             choices: ["MIT License", "GNU GPLv3", "Apache License 2.0", "The Unlicense"],
         },
+        {
+            type: "input",
+            name: "licenseName",
+            message: "Enter your full name for the license",
+        },
+        {
+            type: "input",
+            name: "licenseYear",
+            message: "Enter the current year for the license",
+        },
     ]);
 
 promptUser()
